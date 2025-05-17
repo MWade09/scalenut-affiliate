@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scalenut | AI-Powered Content Creation Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      /* Core color system */
+      --primary-100: #EBE5FF;
+      --primary-200: #D6CAFF;
+      --primary-300: #B49DFF;
+      --primary-400: #9370FF;
+      --primary-500: #7B4DFF;
+      --primary-600: #6234E0;
+      --primary-700: #4A1FB3;
+      --primary-800: #341487;
+      --primary-900: #1F0C5A;
+      
+      --secondary-100: #E0FCFF;
+      --secondary-200: #BEF8FF;
+      --secondary-300: #8CEFFF;
+      --secondary-400: #5AE4FF;
+      --secondary-500: #00D5FF;
+      --secondary-600: #00AEDB;
+      --secondary-700: #0088B3;
+      --secondary-800: #00648A;
+      --secondary-900: #004662;
+      
+      --accent-100: #FFF6E0;
+      --accent-200: #FFECC2;
+      --accent-300: #FFDD8A;
+      --accent-400: #FFCF52;
+      --accent-500: #FFBF1A;
+      --accent-600: #E6A600;
+      --accent-700: #B38300;
+      --accent-800: #805E00;
+      --accent-900: #4D3900;
+      
+      --neutral-100: #F8F9FC;
+      --neutral-200: #F1F3F9;
+      --neutral-300: #E4E8F0;
+      --neutral-400: #D1D6E1;
+      --neutral-500: #A8B0C0;
+      --neutral-600: #6E7891;
+      --neutral-700: #4A5168;
+      --neutral-800: #2D3348;
+      --neutral-900: #111827;
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
+      --gradient-secondary: linear-gradient(135deg, var(--secondary-500) 0%, var(--secondary-700) 100%);
+      --gradient-accent: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-600) 100%);
+      --gradient-hero: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-700) 50%, var(--secondary-700) 100%);
+      --gradient-card: linear-gradient(135deg, rgba(123, 77, 255, 0.08) 0%, rgba(0, 213, 255, 0.08) 100%);
+      --gradient-cta: linear-gradient(90deg, var(--accent-500) 0%, var(--accent-600) 100%);
+      --gradient-text: linear-gradient(90deg, var(--primary-500) 0%, var(--secondary-500) 100%);
+      
+      /* Shadows */
+      --shadow-sm: 0px 2px 8px rgba(17, 24, 39, 0.08);
+      --shadow-md: 0px 4px 16px rgba(17, 24, 39, 0.12);
+      --shadow-lg: 0px 8px 32px rgba(17, 24, 39, 0.16);
+      --shadow-xl: 0px 16px 48px rgba(17, 24, 39, 0.2);
+      --shadow-accent: 0px 8px 24px rgba(255, 191, 26, 0.24);
+      --shadow-primary: 0px 8px 24px rgba(123, 77, 255, 0.24);
+      
+      /* Typography */
+      --font-family: 'Plus Jakarta Sans', sans-serif;
+      
+      /* Spacing */
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --spacing-2xl: 3rem;
+      --spacing-3xl: 4rem;
+      
+      /* Border radius */
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+    }
+    
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      background-color: var(--neutral-900);
+      color: var(--neutral-100);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.01em;
+    }
+    
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+    
+    p {
+      margin-bottom: var(--spacing-lg);
+      font-size: clamp(1rem, 1.1vw, 1.125rem);
+    }
+    
+    a {
+      color: var(--primary-400);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    a:hover {
+      color: var(--primary-300);
+    }
+    
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      text-align: center;
+      white-space: nowrap;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-primary);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      filter: brightness(1.1);
+    }
+    
+    .btn-accent {
+      background: var(--gradient-cta);
+      color: var(--neutral-900);
+      box-shadow: var(--shadow-accent);
+    }
+    
+    .btn-accent:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      filter: brightness(1.05);
+    }
+    
+    .btn-lg {
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+      border-radius: var(--radius-lg);
+    }
+    
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: var(--spacing-md) 0;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      background: rgba(17, 24, 39, 0.8);
+    }
+    
+    .header.scrolled {
+      padding: var(--spacing-sm) 0;
+      background: rgba(17, 24, 39, 0.95);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .logo img {
+      height: 36px;
+      width: auto;
+    }
+    
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav {
+      display: flex;
+      gap: var(--spacing-xl);
+    }
+    
+    .nav-link {
+      color: var(--neutral-200);
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: white;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-text);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Hero section */
+    .hero {
+      position: relative;
+      padding: 10rem 0 6rem;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-hero);
+      opacity: 0.8;
+      z-index: -1;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
+      background-size: cover;
+      background-position: center;
+      filter: blur(3px) brightness(0.3);
+      z-index: -2;
+    }
+    
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero-title {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+      color: var(--neutral-200);
+      margin-bottom: var(--spacing-xl);
+      max-width: 600px;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-2xl);
+    }
+    
+    .hero-cta-note {
+      font-size: 0.875rem;
+      color: var(--neutral-300);
+      margin-top: var(--spacing-sm);
+    }
+    
+    .hero-image {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: var(--spacing-2xl) auto 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      transform: perspective(1000px) rotateX(5deg);
+      transition: all 0.5s ease;
+    }
+    
+    .hero-image:hover {
+      transform: perspective(1000px) rotateX(0);
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .hero-image:hover img {
+      transform: scale(1.02);
+    }
+    
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 80%, rgba(0,0,0,0.5) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    /* Features section */
+    .features {
+      padding: var(--spacing-3xl) 0;
+      position: relative;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: var(--spacing-2xl);
+    }
+    
+    .section-title h2 {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--neutral-300);
+      text-align: center;
+      max-width: 600px;
+      margin: -1rem auto var(--spacing-2xl);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-xl);
+    }
+    
+    .feature-card {
+      background: var(--gradient-card);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(123, 77, 255, 0.2);
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-md);
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .feature-description {
+      color: var(--neutral-300);
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+    
+    /* Dashboard showcase */
+    .dashboard {
+      padding: var(--spacing-3xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dashboard-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(123, 77, 255, 0.1) 0%, rgba(17, 24, 39, 0) 70%);
+      z-index: -1;
+    }
+    
+    .dashboard-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .dashboard-tabs {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-xl);
+      background: rgba(45, 51, 72, 0.5);
+      padding: 0.5rem;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(10px);
+    }
+    
+    .dashboard-tab {
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--neutral-300);
+    }
+    
+    .dashboard-tab.active {
+      background: var(--gradient-primary);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .dashboard-screens {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      height: 600px;
+      margin-top: var(--spacing-xl);
+    }
+    
+    .dashboard-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .dashboard-screen.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .dashboard-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+    
+    /* Pricing section */
+    .pricing {
+      padding: var(--spacing-3xl) 0;
+      position: relative;
+    }
+    
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+      margin-top: var(--spacing-2xl);
+    }
+    
+    .pricing-card {
+      background: var(--neutral-800);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .pricing-card.popular {
+      background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-800) 100%);
+      border-color: var(--primary-500);
+      transform: scale(1.05);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .pricing-card.popular:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+    
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      right: var(--spacing-xl);
+      background: var(--gradient-accent);
+      color: var(--neutral-900);
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 0.25rem 1rem;
+      border-radius: var(--radius-full);
+    }
+    
+    .pricing-header {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .pricing-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .pricing-description {
+      color: var(--neutral-400);
+      font-size: 0.875rem;
+    }
+    
+    .pricing-price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: var(--spacing-md);
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .pricing-currency {
+      font-size: 1rem;
+      margin-right: 0.25rem;
+      color: var(--neutral-300);
+    }
+    
+    .pricing-period {
+      font-size: 0.875rem;
+      color: var(--neutral-400);
+      font-weight: 400;
+      margin-left: 0.5rem;
+      align-self: flex-end;
+    }
+    
+    .pricing-features {
+      list-style: none;
+      margin-bottom: var(--spacing-xl);
+      flex-grow: 1;
+    }
+    
+    .pricing-feature {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-sm);
+      color: var(--neutral-300);
+    }
+    
+    .pricing-feature-icon {
+      color: var(--primary-400);
+      font-size: 1.25rem;
+    }
+    
+    .pricing-cta {
+      width: 100%;
+    }
+    
+    /* Demo section */
+    .demo {
+      padding: var(--spacing-3xl) 0;
+      background: var(--neutral-800);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .demo-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 213, 255, 0.1) 0%, rgba(17, 24, 39, 0) 70%);
+      z-index: 0;
+    }
+    
+    .demo-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .demo-video {
+      width: 100%;
+      max-width: 800px;
+      margin-top: var(--spacing-xl);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .demo-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .demo-cta {
+      margin-top: var(--spacing-xl);
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: var(--spacing-3xl) 0;
+      position: relative;
+    }
+    
+    .testimonial-slider {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .testimonial-slide {
+      min-width: 100%;
+      padding: 0 var(--spacing-md);
+    }
+    
+    .testimonial-card {
+      background: var(--neutral-800);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+    
+    .testimonial-quote {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: var(--spacing-lg);
+      position: relative;
+      padding-left: var(--spacing-lg);
+    }
+    
+    .testimonial-quote::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-size: 3rem;
+      color: var(--primary-500);
+      font-family: serif;
+      line-height: 1;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .testimonial-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .testimonial-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    
+    .testimonial-role {
+      color: var(--neutral-400);
+      font-size: 0.875rem;
+    }
+    
+    .testimonial-controls {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .testimonial-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--neutral-800);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .testimonial-btn:hover {
+      background: var(--primary-700);
+      border-color: var(--primary-500);
+    }
+    
+    /* CTA section */
+    .cta {
+      padding: var(--spacing-3xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-hero);
+      opacity: 0.9;
+      z-index: -1;
+    }
+    
+    .cta-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .cta-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .cta-subtitle {
+      font-size: 1.25rem;
+      color: var(--neutral-200);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    /* Footer */
+    .footer {
+      padding: var(--spacing-2xl) 0 var(--spacing-xl);
+      background: var(--neutral-900);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .footer-logo {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .footer-link {
+      color: var(--neutral-300);
+      transition: color 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: white;
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--neutral-800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: var(--primary-600);
+      transform: translateY(-3px);
+    }
+    
+    .footer-copyright {
+      color: var(--neutral-500);
+      font-size: 0.875rem;
+    }
+    
+    .footer-affiliate {
+      margin-top: var(--spacing-xs);
+      color: var(--neutral-500);
+      font-size: 0.75rem;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    
+        @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 191, 26, 0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(255, 191, 26, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 191, 26, 0); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .animate-pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    .shimmer {
+      background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.1) 50%, 
+        rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .hero {
+        padding: 8rem 0 4rem;
+      }
+      
+      .hero-image {
+        transform: perspective(1000px) rotateX(3deg);
+      }
+      
+      .pricing-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      
+      .pricing-card.popular {
+        transform: scale(1.03);
+      }
+      
+      .pricing-card.popular:hover {
+        transform: translateY(-5px) scale(1.03);
+      }
+      
+      .dashboard-screens {
+        height: 500px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .hero-cta .btn {
+        width: 100%;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .dashboard-screens {
+        height: 400px;
+      }
+      
+      .pricing-card.popular {
+        transform: scale(1);
+      }
+      
+      .pricing-card.popular:hover {
+        transform: translateY(-5px);
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .cta-buttons .btn {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .hero {
+        padding: 7rem 0 3rem;
+      }
+      
+      .dashboard-tabs {
+        flex-direction: column;
+        background: none;
+        backdrop-filter: none;
+        gap: var(--spacing-xs);
+      }
+      
+      .dashboard-tab {
+        width: 100%;
+        text-align: center;
+        background: rgba(45, 51, 72, 0.5);
+        backdrop-filter: blur(10px);
+      }
+      
+      .dashboard-screens {
+        height: 300px;
+      }
+      
+      .testimonial-author {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: var(--neutral-800);
+      z-index: 200;
+      padding: var(--spacing-xl);
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .mobile-menu.active {
+      right: 0;
+    }
+    
+    .mobile-menu-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .mobile-menu-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+    
+    .mobile-menu-link {
+      color: var(--neutral-200);
+      font-weight: 500;
+      font-size: 1.25rem;
+    }
+    
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 199;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    /* Utility classes */
+    .text-gradient {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .highlight {
+      color: var(--accent-500);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-container">
+      <div class="logo">
+        <img src="/images/scalenutLogo2.png" alt="Scalenut Logo">
+        <span class="logo-text">Scalenut</span>
+      </div>
+      <nav class="nav">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#dashboard" class="nav-link">Dashboard</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#demo" class="nav-link">Demo</a>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu-close" id="mobile-menu-close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <nav class="mobile-menu-nav">
+      <a href="#features" class="mobile-menu-link">Features</a>
+      <a href="#dashboard" class="mobile-menu-link">Dashboard</a>
+      <a href="#pricing" class="mobile-menu-link">Pricing</a>
+      <a href="#demo" class="mobile-menu-link">Demo</a>
+    </nav>
+  </div>
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Create <span class="text-gradient">AI-Powered Content</span> 10x Faster</h1>
+        <p class="hero-subtitle">Scalenut helps marketers, agencies, and businesses create high-quality, SEO-optimized content that ranks and converts.</p>
+        <div class="hero-cta">
+          <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="btn btn-accent btn-lg animate-pulse">Start Free Trial</a>
+          <a href="https://www.scalenut.com/schedule-demo/?fpr=mathew93" target="_blank" class="btn btn-primary btn-lg">Schedule Demo</a>
+        </div>
+        <div class="hero-cta-note">No credit card required. Cancel anytime.</div>
+      </div>
+      <div class="hero-image animate-float">
+        <img src="/images/scalenutDashboard.png" alt="Scalenut Dashboard">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Powerful Features</h2>
+      </div>
+      <p class="section-subtitle">Everything you need to create content that ranks and converts</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3 class="feature-title">AI Content Writer</h3>
+          <p class="feature-description">Generate high-quality blog posts, product descriptions, ads, and more with advanced AI technology.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3 class="feature-title">SEO Optimization</h3>
+          <p class="feature-description">Get real-time SEO recommendations, keyword suggestions, and competitor analysis to rank higher.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 class="feature-title">Content Research</h3>
+          <p class="feature-description">Research topics, questions, and trends instantly. Save hours on research and create authoritative content.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3 class="feature-title">Cruise Mode</h3>
+          <p class="feature-description">Generate complete long-form content with a single click. Perfect for blog posts and articles.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <h3 class="feature-title">Multilingual Support</h3>
+          <p class="feature-description">Create content in 40+ languages and reach global audiences with localized content.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3 class="feature-title">Team Collaboration</h3>
+          <p class="feature-description">Invite team members, assign tasks, and manage workflows—all in one intuitive dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Dashboard Showcase -->
+  <section class="dashboard" id="dashboard">
+    <div class="dashboard-bg"></div>
+    <div class="container">
+      <div class="section-title">
+        <h2>Intuitive Dashboard</h2>
+      </div>
+      <p class="section-subtitle">Explore Scalenut's powerful features through our user-friendly interface</p>
+      <div class="dashboard-content">
+        <div class="dashboard-tabs">
+          <div class="dashboard-tab active" data-tab="content">Integrations</div>
+          <div class="dashboard-tab" data-tab="seo">SEO Tools</div>
+          <div class="dashboard-tab" data-tab="research">Research</div>
+          <div class="dashboard-tab" data-tab="templates">Templates</div>
+        </div>
+        <div class="dashboard-screens">
+          <div class="dashboard-screen active" data-screen="content">
+            <img src="/images/ScalenutIntegrations.png" alt="Integrations">
+          </div>
+          <div class="dashboard-screen" data-screen="seo">
+            <img src="/images/SEOScalenut.png" alt="SEO Tools">
+          </div>
+          <div class="dashboard-screen" data-screen="research">
+            <img src="/images/ScalenutResearch1.png" alt="Research Tools">
+          </div>
+          <div class="dashboard-screen" data-screen="templates">
+            <img src="/images/ScalenutTemplates.png" alt="Templates">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-title">
+        <h2>Simple, Transparent Pricing</h2>
+      </div>
+      <p class="section-subtitle">Choose a plan that fits your needs. Start free, upgrade anytime.</p>
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Essential</h3>
+            <p class="pricing-description">Perfect for individuals and small teams</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-currency">$</span>49<span class="pricing-period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>40,000 words per month</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>5 SEO Reports</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>Content Editor</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>50+ AI Templates</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>1 User Seat</span>
+            </li>
+          </ul>
+          <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="btn btn-primary pricing-cta">Get Started</a>
+        </div>
+        <div class="pricing-card popular">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3 class="pricing-name">Growth</h3>
+            <p class="pricing-description">Ideal for growing businesses</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-currency">$</span>79<span class="pricing-period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>100,000 words per month</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>20 SEO Reports</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>Advanced Content Editor</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>100+ AI Templates</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>3 User Seats</span>
+            </li>
+          </ul>
+          <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="btn btn-accent pricing-cta">Get Started</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Pro</h3>
+            <p class="pricing-description">For agencies and large teams</p>
+          </div>
+          <div class="pricing-price">
+            <span class="pricing-currency">$</span>149<span class="pricing-period">/month</span>
+          </div>
+          <ul class="pricing-features">
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>300,000 words per month</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>Unlimited SEO Reports</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>Premium Content Editor</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>All AI Templates</span>
+            </li>
+            <li class="pricing-feature">
+              <span class="pricing-feature-icon">✓</span>
+              <span>10 User Seats</span>
+            </li>
+          </ul>
+          <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="btn btn-primary pricing-cta">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-title">
+        <h2>What Our Users Say</h2>
+      </div>
+      <div class="testimonial-slider" id="testimonial-slider">
+        <div class="testimonial-track" id="testimonial-track">
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <p class="testimonial-quote">Scalenut has completely transformed our content creation process. We're now producing 3x more content in half the time, and our organic traffic has increased by 150% in just three months.</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                </div>
+                <div class="testimonial-info">
+                  <div class="testimonial-name">Sarah Johnson</div>
+                  <div class="testimonial-role">Marketing Director, TechCorp</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <p class="testimonial-quote">As a content agency, we need to produce high-quality content at scale. Scalenut's AI tools and SEO features have been a game-changer for our team. Our clients are thrilled with the results.</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                </div>
+                <div class="testimonial-info">
+                  <div class="testimonial-name">Michael Chen</div>
+                  <div class="testimonial-role">CEO, ContentPro Agency</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <p class="testimonial-quote">I was skeptical about AI content tools, but Scalenut surprised me. The quality is exceptional, and the SEO insights have helped us rank for competitive keywords we couldn't crack before.</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
+                </div>
+                <div class="testimonial-info">
+                  <div class="testimonial-name">Emma Rodriguez</div>
+                  <div class="testimonial-role">SEO Specialist, GrowthHackers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-controls">
+          <button class="testimonial-btn" id="testimonial-prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="testimonial-btn" id="testimonial-next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Demo Section -->
+  <section class="demo" id="demo">
+    <div class="demo-bg"></div>
+    <div class="container">
+      <div class="demo-content">
+        <div class="section-title">
+          <h2>See Scalenut in Action</h2>
+        </div>
+        <p class="section-subtitle">Watch how Scalenut can transform your content creation process</p>
+        <div class="demo-video">
+          <video poster="https://www.scalenut.com/images/demo-thumbnail.jpg" controls>
+            <source src="/videos/Scalenut-Cruise Mode.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="demo-cta">
+          <a href="https://www.scalenut.com/schedule-demo/?fpr=mathew93" target="_blank" class="btn btn-primary btn-lg">Schedule a Personalized Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-bg"></div>
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Transform Your Content Strategy?</h2>
+        <p class="cta-subtitle">Join 200,000+ marketers, agencies, and businesses already using Scalenut to create content that ranks and converts.</p>
+        <div class="cta-buttons">
+          <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="btn btn-accent btn-lg animate-pulse">Start Free Trial</a>
+          <a href="https://www.scalenut.com/schedule-demo/?fpr=mathew93" target="_blank" class="btn btn-primary btn-lg">Schedule Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-logo">
+        <img src="/images/scalenutLogo2.png" alt="Scalenut Logo" height="36">
+      </div>
+      <div class="footer-links">
+        <a href="#features" class="footer-link">Features</a>
+        <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="footer-link">Pricing</a>
+        <a href="https://www.scalenut.com/schedule-demo/?fpr=mathew93" target="_blank" class="footer-link">Demo</a>
+        <a href="https://www.scalenut.com/blog/" target="_blank" class="footer-link">Blog</a>
+      </div>
+      <div class="footer-social">
+        <a href="http://x.com/Scalenut_AI" target="_blank" class="social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/company/scalenut/" target="_blank" class="social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+        <a href="https://www.facebook.com/scalenut" target="_blank" class="social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2025 Scalenut. All rights reserved.
+      </div>
+      <div class="footer-affiliate" style="border: solid 1px #fff; padding: 5px; margin-top: 20px; border-radius: 5px;">
+        Affiliate Partner
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      mobileMenuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      mobileMenuOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Dashboard tabs
+    const dashboardTabs = document.querySelectorAll('.dashboard-tab');
+    const dashboardScreens = document.querySelectorAll('.dashboard-screen');
+    
+    dashboardTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        
+        // Remove active class from all tabs and screens
+        dashboardTabs.forEach(t => t.classList.remove('active'));
+        dashboardScreens.forEach(s => s.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding screen
+        tab.classList.add('active');
+        document.querySelector(`.dashboard-screen[data-screen="${tabId}"]`).classList.add('active');
+      });
+    });
+    
+    // Testimonial slider
+    const testimonialTrack = document.getElementById('testimonial-track');
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    const testimonialPrev = document.getElementById('testimonial-prev');
+    const testimonialNext = document.getElementById('testimonial-next');
+    let testimonialIndex = 0;
+    
+    function updateTestimonialSlider() {
+      testimonialTrack.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+    }
+    
+    testimonialPrev.addEventListener('click', () => {
+      testimonialIndex = Math.max(testimonialIndex - 1, 0);
+      updateTestimonialSlider();
+    });
+    
+    testimonialNext.addEventListener('click', () => {
+      testimonialIndex = Math.min(testimonialIndex + 1, testimonialSlides.length - 1);
+      updateTestimonialSlider();
+    });
+    
+    // ScrollReveal animations
+    document.addEventListener('DOMContentLoaded', function() {
+      ScrollReveal().reveal('.feature-card', {
+        distance: '40px',
+        origin: 'bottom',
+        duration: 1000,
+        interval: 100
+      });
+      
+      ScrollReveal().reveal('.pricing-card', {
+        distance: '40px',
+        origin: 'bottom',
+        duration: 1000,
+        interval: 200
+      });
+      
+      ScrollReveal().reveal('.section-title', {
+        distance: '20px',
+        origin: 'top',
+        duration: 800
+      });
+      
+            ScrollReveal().reveal('.hero-title, .hero-subtitle', {
+        distance: '30px',
+        origin: 'top',
+        duration: 1000,
+        interval: 200
+      });
+      
+      ScrollReveal().reveal('.hero-cta', {
+        distance: '30px',
+        origin: 'bottom',
+        duration: 1000,
+        delay: 300
+      });
+      
+      ScrollReveal().reveal('.hero-image', {
+        distance: '50px',
+        origin: 'bottom',
+        duration: 1200,
+        delay: 500
+      });
+      
+      // Initialize GSAP animations
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Animate dashboard screens on scroll
+      gsap.from('.dashboard-screens', {
+        scrollTrigger: {
+          trigger: '.dashboard',
+          start: 'top 70%',
+          end: 'bottom 70%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+      });
+      
+      // Animate CTA section
+      gsap.from('.cta-content', {
+        scrollTrigger: {
+          trigger: '.cta',
+          start: 'top 80%',
+          end: 'bottom 80%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out'
+      });
+      
+      // Animate testimonial cards
+      gsap.from('.testimonial-card', {
+        scrollTrigger: {
+          trigger: '.testimonials',
+          start: 'top 70%',
+          end: 'bottom 70%',
+          toggleActions: 'play none none reverse'
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power2.out'
+      });
+    });
+    
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroContent = document.querySelector('.hero-content');
+      const heroImage = document.querySelector('.hero-image');
+      
+      if (scrollY <= 800) {
+        heroContent.style.transform = `translateY(${scrollY * 0.2}px)`;
+        heroImage.style.transform = `perspective(1000px) rotateX(${5 - scrollY * 0.01}deg) translateY(${scrollY * 0.1}px)`;
+      }
+    });
+    
+    // Interactive hover effects for feature cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    
+    featureCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          y: -10,
+          boxShadow: '0 15px 30px rgba(123, 77, 255, 0.2)',
+          borderColor: 'rgba(123, 77, 255, 0.3)',
+          duration: 0.3
+        });
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          y: 0,
+          boxShadow: '0 8px 32px rgba(123, 77, 255, 0.12)',
+          borderColor: 'rgba(255, 255, 255, 0.05)',
+          duration: 0.3
+        });
+      });
+    });
+    
+    // Pricing card hover effects
+    const pricingCards = document.querySelectorAll('.pricing-card');
+    
+    pricingCards.forEach(card => {
+      if (!card.classList.contains('popular')) {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            y: -10,
+            boxShadow: '0 15px 30px rgba(17, 24, 39, 0.2)',
+            borderColor: 'rgba(123, 77, 255, 0.2)',
+            duration: 0.3
+          });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            y: 0,
+            boxShadow: '0 8px 32px rgba(17, 24, 39, 0.12)',
+            borderColor: 'rgba(255, 255, 255, 0.05)',
+            duration: 0.3
+          });
+        });
+      } else {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            y: -10,
+            boxShadow: '0 20px 40px rgba(123, 77, 255, 0.3)',
+            duration: 0.3
+          });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            y: 0,
+            boxShadow: '0 15px 30px rgba(123, 77, 255, 0.2)',
+            duration: 0.3
+          });
+        });
+      }
+    });
+    
+    // Button hover animations
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        gsap.to(button, {
+          scale: 1.05,
+          duration: 0.2
+        });
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        gsap.to(button, {
+          scale: 1,
+          duration: 0.2
+        });
+      });
+      
+      button.addEventListener('mousedown', () => {
+        gsap.to(button, {
+          scale: 0.98,
+          duration: 0.1
+        });
+      });
+      
+      button.addEventListener('mouseup', () => {
+        gsap.to(button, {
+          scale: 1.05,
+          duration: 0.1
+        });
+      });
+    });
+    
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          const headerHeight = document.querySelector('.header').offsetHeight;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Add cursor trail effect
+    function createCursorTrail() {
+      const trail = document.createElement('div');
+      trail.className = 'cursor-trail';
+      trail.style.position = 'fixed';
+      trail.style.width = '8px';
+      trail.style.height = '8px';
+      trail.style.borderRadius = '50%';
+      trail.style.background = 'rgba(123, 77, 255, 0.6)';
+      trail.style.pointerEvents = 'none';
+      trail.style.zIndex = '9999';
+      trail.style.transition = 'transform 0.1s, opacity 0.5s';
+      trail.style.opacity = '0';
+      document.body.appendChild(trail);
+      
+      let trailTimeout;
+      
+      document.addEventListener('mousemove', (e) => {
+        trail.style.opacity = '1';
+        trail.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px) scale(1)`;
+        
+        clearTimeout(trailTimeout);
+        trailTimeout = setTimeout(() => {
+          trail.style.opacity = '0';
+          trail.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px) scale(0)`;
+        }, 300);
+      });
+    }
+    
+    // Initialize cursor trail on desktop devices
+    if (window.innerWidth > 768) {
+      createCursorTrail();
+    }
+    
+    // Add floating animation to accent buttons
+    const accentButtons = document.querySelectorAll('.btn-accent');
+    
+    accentButtons.forEach(button => {
+      gsap.to(button, {
+        y: -5,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut'
+      });
+    });
+    
+    // Add shimmer effect to CTA buttons
+    function addShimmerEffect() {
+      const ctaButtons = document.querySelectorAll('.btn-accent');
+      
+      ctaButtons.forEach(button => {
+        const shimmer = document.createElement('div');
+        shimmer.className = 'shimmer';
+        shimmer.style.position = 'absolute';
+        shimmer.style.top = '0';
+        shimmer.style.left = '0';
+        shimmer.style.width = '100%';
+        shimmer.style.height = '100%';
+        shimmer.style.pointerEvents = 'none';
+        
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+        button.appendChild(shimmer);
+      });
+    }
+    
+    addShimmerEffect();
+  </script>
+</body>
+</html>
+
