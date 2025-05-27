@@ -673,6 +673,92 @@
     .pricing-cta {
       width: 100%;
     }
+
+        /* Pricing toggle */
+    .pricing-toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--spacing-xl);
+      gap: var(--spacing-md);
+    }
+
+    .pricing-toggle {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+
+    .pricing-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .pricing-toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--neutral-700);
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .pricing-toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    .pricing-toggle input:checked + .pricing-toggle-slider {
+      background: var(--primary-500);
+    }
+
+    .pricing-toggle input:checked + .pricing-toggle-slider:before {
+      transform: translateX(30px);
+    }
+
+    .pricing-toggle-label {
+      font-weight: 500;
+      color: var(--neutral-300);
+      transition: color 0.3s ease;
+    }
+
+    .pricing-toggle-label.active {
+      color: var(--neutral-100);
+      font-weight: 600;
+    }
+
+    .pricing-toggle-save {
+      font-size: 0.75rem;
+      background: var(--accent-500);
+      color: var(--neutral-900);
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      margin-left: 5px;
+      font-weight: 600;
+    }
+
+    .pricing-period-yearly {
+      display: none;
+    }
+
+    .pricing-yearly-billed {
+      font-size: 0.75rem;
+      color: var(--accent-500);
+      margin-top: 5px;
+      font-weight: 600;
+    }
     
     /* Demo section */
     .demo {
@@ -713,6 +799,33 @@
     .demo-video video {
       width: 100%;
       height: auto;
+      display: block;
+    }
+
+    .video-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .video-play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .video-wrapper:hover .video-play-button {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 1;
+    }
+
+    #demo-video {
+      width: 100%;
       display: block;
     }
     
@@ -1057,17 +1170,31 @@
       }
       
       .dashboard-tabs {
-        flex-direction: column;
-        background: none;
-        backdrop-filter: none;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        background: rgba(45, 51, 72, 0.5);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem;
+        border-radius: var(--radius-full);
         gap: var(--spacing-xs);
+        -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        max-width: 100%;
       }
       
       .dashboard-tab {
+        flex: 0 0 auto;
+        padding: 0.75rem 1.25rem;
+        border-radius: var(--radius-full);
+        font-weight: 600;
+      }
+
+      .dashboard-tabs-container {
+        position: relative;
         width: 100%;
-        text-align: center;
-        background: rgba(45, 51, 72, 0.5);
-        backdrop-filter: blur(10px);
+        padding: 0 15px;
       }
       
       .dashboard-screens {
@@ -1161,7 +1288,7 @@
     <div class="container header-container">
       <div class="logo">
         <img src="/images/scalenutLogo2.png" alt="Scalenut Logo">
-        <span class="logo-text">Scalenut</span>
+        <span class="logo-text"><a href="https://scalenut.com/?fpr=mathew93" target="_blank">Scalenut</a></span>
       </div>
       <nav class="nav">
         <a href="#features" class="nav-link">Features</a>
@@ -1266,11 +1393,13 @@
       </div>
       <p class="section-subtitle">Explore Scalenut's powerful features through our user-friendly interface</p>
       <div class="dashboard-content">
-        <div class="dashboard-tabs">
-          <div class="dashboard-tab active" data-tab="content">Integrations</div>
-          <div class="dashboard-tab" data-tab="seo">SEO Tools</div>
-          <div class="dashboard-tab" data-tab="research">Research</div>
-          <div class="dashboard-tab" data-tab="templates">Templates</div>
+        <div class="dashboard-tabs-container">
+          <div class="dashboard-tabs">
+            <div class="dashboard-tab active" data-tab="content">Integrations</div>
+            <div class="dashboard-tab" data-tab="seo">SEO Tools</div>
+            <div class="dashboard-tab" data-tab="research">Research</div>
+            <div class="dashboard-tab" data-tab="templates">Templates</div>
+          </div>
         </div>
         <div class="dashboard-screens">
           <div class="dashboard-screen active" data-screen="content">
@@ -1292,6 +1421,15 @@
   
   <!-- Pricing Section -->
   <section class="pricing" id="pricing">
+    <!-- Add this right before .pricing-cards div -->
+    <div class="pricing-toggle-container">
+      <span class="pricing-toggle-label">Monthly</span>
+      <label class="pricing-toggle">
+        <input type="checkbox" id="pricing-toggle-input">
+        <span class="pricing-toggle-slider"></span>
+      </label>
+      <span class="pricing-toggle-label">Yearly <span class="pricing-toggle-save">Save 60%</span></span>
+    </div>
     <div class="container">
       <div class="section-title">
         <h2>Simple, Transparent Pricing</h2>
@@ -1303,8 +1441,12 @@
             <h3 class="pricing-name">Essential</h3>
             <p class="pricing-description">Perfect for individuals and small teams</p>
           </div>
-          <div class="pricing-price">
-            <span class="pricing-currency">$</span>49<span class="pricing-period">/month</span>
+          <div class="pricing-price pricing-price-monthly">
+            <span class="pricing-currency">$</span>49<span class="pricing-period">/ month</span>
+          </div>
+          <div class="pricing-price pricing-price-yearly" style="display: none;">
+            <span class="pricing-currency">$</span>20<span class="pricing-period">/ month</span>
+            <div class="pricing-yearly-billed">billed annually</div>
           </div>
           <ul class="pricing-features">
             <li class="pricing-feature">
@@ -1336,8 +1478,12 @@
             <h3 class="pricing-name">Growth</h3>
             <p class="pricing-description">Ideal for growing businesses</p>
           </div>
-          <div class="pricing-price">
-            <span class="pricing-currency">$</span>79<span class="pricing-period">/month</span>
+          <div class="pricing-price pricing-price-monthly">
+            <span class="pricing-currency">$</span>79<span class="pricing-period">/ month</span>
+          </div>
+          <div class="pricing-price pricing-price-yearly" style="display: none;">
+            <span class="pricing-currency">$</span>32<span class="pricing-period">/ month</span>
+            <div class="pricing-yearly-billed">billed annually</div>
           </div>
           <ul class="pricing-features">
             <li class="pricing-feature">
@@ -1368,8 +1514,12 @@
             <h3 class="pricing-name">Pro</h3>
             <p class="pricing-description">For agencies and large teams</p>
           </div>
-          <div class="pricing-price">
-            <span class="pricing-currency">$</span>149<span class="pricing-period">/month</span>
+          <div class="pricing-price pricing-price-monthly">
+            <span class="pricing-currency">$</span>149<span class="pricing-period">/ month</span>
+          </div>
+          <div class="pricing-price pricing-price-yearly" style="display: none;">
+            <span class="pricing-currency">$</span>60<span class="pricing-period">/ month</span>
+            <div class="pricing-yearly-billed">billed annually</div>
           </div>
           <ul class="pricing-features">
             <li class="pricing-feature">
@@ -1409,42 +1559,42 @@
         <div class="testimonial-track" id="testimonial-track">
           <div class="testimonial-slide">
             <div class="testimonial-card">
-              <p class="testimonial-quote">Scalenut has completely transformed our content creation process. We're now producing 3x more content in half the time, and our organic traffic has increased by 150% in just three months.</p>
+              <p class="testimonial-quote">Scalenut’s content is profound and factual. I rely on the "quora answer" and SEO modules to craft long-form content swiftly. Impressive results!</p>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">
-                  <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                  <img src="https://cdn.prod.website-files.com/60ef088dd8fef919efabb412/62a1dc3c714b1ed1ce6cc780_Benedict%20T.webp" alt="Benedict T.">
                 </div>
                 <div class="testimonial-info">
-                  <div class="testimonial-name">Sarah Johnson</div>
-                  <div class="testimonial-role">Marketing Director, TechCorp</div>
+                  <div class="testimonial-name">Benedict T.</div>
+                  <div class="testimonial-role">SEO Consultant</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="testimonial-slide">
             <div class="testimonial-card">
-              <p class="testimonial-quote">As a content agency, we need to produce high-quality content at scale. Scalenut's AI tools and SEO features have been a game-changer for our team. Our clients are thrilled with the results.</p>
+              <p class="testimonial-quote">Its long-form assistant is everything you need to create great article outlines. It shows you SERP data including your competitors & their article outlines.</p>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">
-                  <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                  <img src="https://cdn.prod.website-files.com/60ef088dd8fef919efabb412/62f340c0ff92d3af67bc284d_Carlos%20U.webp" alt="Carlos U.">
                 </div>
                 <div class="testimonial-info">
-                  <div class="testimonial-name">Michael Chen</div>
-                  <div class="testimonial-role">CEO, ContentPro Agency</div>
+                  <div class="testimonial-name">Carlos U.</div>
+                  <div class="testimonial-role">Digital Marketing Consultant</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="testimonial-slide">
             <div class="testimonial-card">
-              <p class="testimonial-quote">I was skeptical about AI content tools, but Scalenut surprised me. The quality is exceptional, and the SEO insights have helped us rank for competitive keywords we couldn't crack before.</p>
+              <p class="testimonial-quote">The keyword grouping is a great feature. I also like the AI content writing interface. The cruise mode is very user-friendly. I highly recommend it.</p>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">
-                  <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
+                  <img src="https://cdn.prod.website-files.com/60ef088dd8fef919efabb412/64edc7461b1b4195cf79de28_kavitha.png" alt="Kavitha R.">
                 </div>
                 <div class="testimonial-info">
-                  <div class="testimonial-name">Emma Rodriguez</div>
-                  <div class="testimonial-role">SEO Specialist, GrowthHackers</div>
+                  <div class="testimonial-name">Kavitha R.</div>
+                  <div class="testimonial-role">International Marketing and Communications Representative</div>
                 </div>
               </div>
             </div>
@@ -1476,10 +1626,18 @@
         </div>
         <p class="section-subtitle">Watch how Scalenut can transform your content creation process</p>
         <div class="demo-video">
-          <video poster="https://www.scalenut.com/images/demo-thumbnail.jpg" controls>
-            <source src="/videos/Scalenut-Cruise Mode.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <div class="video-wrapper">
+            <video id="demo-video" poster="/images/video-preview.png">
+              <source src="/videos/Scalenut-Cruise Mode.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-play-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="#FFBF1A" stroke="none">
+                <circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.5)"></circle>
+                <polygon points="10 8 16 12 10 16"></polygon>
+              </svg>
+            </div>
+          </div>
         </div>
         <div class="demo-cta">
           <a href="https://www.scalenut.com/schedule-demo/?fpr=mathew93" target="_blank" class="btn btn-primary btn-lg">Schedule a Personalized Demo</a>
@@ -1513,7 +1671,6 @@
         <a href="#features" class="footer-link">Features</a>
         <a href="https://www.scalenut.com/pricing/?fpr=mathew93" target="_blank" class="footer-link">Pricing</a>
         <a href="https://www.scalenut.com/schedule-demo/?fpr=mathew93" target="_blank" class="footer-link">Demo</a>
-        <a href="https://www.scalenut.com/blog/" target="_blank" class="footer-link">Blog</a>
       </div>
       <div class="footer-social">
         <a href="http://x.com/Scalenut_AI" target="_blank" class="social-icon">
@@ -1642,7 +1799,7 @@
         duration: 800
       });
       
-            ScrollReveal().reveal('.hero-title, .hero-subtitle', {
+      ScrollReveal().reveal('.hero-title, .hero-subtitle', {
         distance: '30px',
         origin: 'top',
         duration: 1000,
@@ -1785,6 +1942,47 @@
         });
       }
     });
+
+        // Add this to your script section
+    // Pricing toggle functionality
+    const pricingToggle = document.getElementById('pricing-toggle-input');
+    const monthlyLabels = document.querySelectorAll('.pricing-period-monthly');
+    const yearlyLabels = document.querySelectorAll('.pricing-period-yearly');
+    const monthlyPrices = document.querySelectorAll('.pricing-price-monthly');
+    const yearlyPrices = document.querySelectorAll('.pricing-price-yearly');
+    const toggleLabels = document.querySelectorAll('.pricing-toggle-label');
+
+    pricingToggle.addEventListener('change', function() {
+      if (this.checked) {
+        // Yearly pricing
+        monthlyPrices.forEach(price => price.style.display = 'none');
+        yearlyPrices.forEach(price => price.style.display = 'flex');
+        toggleLabels[1].classList.add('active');
+        toggleLabels[0].classList.remove('active');
+      } else {
+        // Monthly pricing
+        monthlyPrices.forEach(price => price.style.display = 'flex');
+        yearlyPrices.forEach(price => price.style.display = 'none');
+        toggleLabels[0].classList.add('active');
+        toggleLabels[1].classList.remove('active');
+      }
+    });
+
+// Initialize toggle state
+toggleLabels[0].classList.add('active');
+
+    // Enhanced scrolling for dashboard tabs
+    document.querySelectorAll('.dashboard-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Center the clicked tab in the scroll view
+        const tabsContainer = document.querySelector('.dashboard-tabs');
+        const tabRect = this.getBoundingClientRect();
+        const containerRect = tabsContainer.getBoundingClientRect();
+        
+        const centerPosition = tabRect.left + (tabRect.width / 2) - containerRect.left - (containerRect.width / 2);
+        tabsContainer.scrollBy({ left: centerPosition, behavior: 'smooth' });
+      });
+    });
     
     // Button hover animations
     const buttons = document.querySelectorAll('.btn');
@@ -1838,7 +2036,28 @@
         }
       });
     });
-    
+
+        // Custom video player
+    const videoWrapper = document.querySelector('.video-wrapper');
+    const video = document.getElementById('demo-video');
+    const playButton = document.querySelector('.video-play-button');
+
+    if (videoWrapper && video) {
+      videoWrapper.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+          playButton.style.opacity = 0;
+        } else {
+          video.pause();
+          playButton.style.opacity = 0.9;
+        }
+      });
+      
+      video.addEventListener('ended', () => {
+        playButton.style.opacity = 0.9;
+      });
+    }
+
     // Add cursor trail effect
     function createCursorTrail() {
       const trail = document.createElement('div');
